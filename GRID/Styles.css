@@ -1,0 +1,66 @@
+/* Container styling */
+.grid-container {
+  display: grid;
+  /* 4 columns: standardizing layout widths */
+  grid-template-columns: 1.2fr 1.5fr 1.5fr 1.2fr;
+  /* 3 rows of equal height */
+  grid-template-rows: repeat(3, 150px);
+  /* 10px spacing as shown in the image */
+  gap: 10px;
+  background-color: white;
+  padding: 20px;
+  width: 100%;
+  max-width: 800px;
+  box-sizing: border-box;
+}
+
+/* Base item styling */
+.item {
+  border-radius: 4px;
+}
+
+/* Color definitions */
+.green-tall-left, .green-wide-top, .green-tall-right { background-color: #64C253; }
+.red-top-right, .red-middle-right, .red-bottom-left { background-color: #E6343B; }
+.orange-middle-left, .orange-bottom-right { background-color: #FFAE25; }
+
+/* Grid Placement Rules */
+.green-tall-left {
+  grid-row: 1 / 4;
+  grid-column: 1 / 2;
+}
+
+.green-wide-top {
+  grid-row: 1 / 2;
+  grid-column: 2 / 4;
+}
+
+.red-top-right {
+  grid-row: 1 / 2;
+  grid-column: 4 / 5;
+}
+
+.orange-middle-left {
+  grid-row: 2 / 3;
+  grid-column: 2 / 3;
+}
+
+.red-middle-right {
+  grid-row: 2 / 3;
+  grid-column: 3 / 4;
+}
+
+.green-tall-right {
+  grid-row: 2 / 4;
+  grid-column: 4 / 5;
+}
+
+.red-bottom-left {
+  grid-row: 3 / 4;
+  grid-column: 2 / 3;
+}
+
+.orange-bottom-right {
+  grid-row: 3 / 4;
+  grid-column: 3 / 4;
+}
