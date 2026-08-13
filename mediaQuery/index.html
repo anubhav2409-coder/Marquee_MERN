@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* #box{
+            height: 200px;
+            width: 300px;
+            margin: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: cornflowerblue;
+            transition-property: all;
+            transition-duration: 2s;
+            transition-delay: 1s;
+            border-radius: 10px;
+        } */
+        /* #box:hover{
+            background-color: aquamarine;
+            width: 500px;
+            color: brown;
+            scale: 1.1;
+        } */
+
+        #box{
+            height: 200px;
+            width: 200px;
+            background-color: blueviolet;
+            animation-name: pop-in-out;
+            animation-duration: 1.5s;
+            animation-iteration-count: infinite;
+        }
+        @keyframes pop-in-out{
+            
+            0%{
+                background-color: white;
+                margin-left: 0;
+            }
+            25%{
+                background-color: blue;
+                margin-left: 150px;
+                margin-top: 0;
+            }
+            75%{
+                background-color: brown;
+                margin-left: 150px;
+                margin-top: 200px;
+            }
+            100%{
+                background-color: chartreuse;
+                margin-left: 0;
+                margin-top: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="box"><h2>hower to see transition</h2></div>
+</body>
+</html>

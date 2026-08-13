@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Drawing Board</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      body {
+        background: #c7d3c0;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 25px;
+        gap: 20px;
+      }
+
+      #drawing-board {
+        width: 75vw;
+        height: 75vh;
+        background: #e8f5e9;
+        border: 2px solid gray;
+        border-radius: 20px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .drawing {
+        width: 10px;
+        height: 10px;
+        background: red;
+        position: absolute;
+        border-radius: 50%;
+      }
+
+      .controls {
+        width: 75vw;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
+        padding: 15px 20px;
+        background: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      }
+
+      .control-group {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      button {
+        padding: 8px 18px;
+        border: none;
+        border-radius: 8px;
+        background: #ef5350;
+        color: white;
+        cursor: pointer;
+        font-size: 14px;
+      }
+
+      button:hover {
+        background: #d32f2f;
+      }
+
+      input[type="range"] {
+        width: 180px;
+        cursor: pointer;
+      }
+
+      input[type="color"] {
+        width: 40px;
+        height: 40px;
+        border: none;
+        cursor: pointer;
+        background: none;
+      }
+      .header {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        padding: 30px 0;
+      }
+      .title {
+        font-size: 28px;
+        font-weight: 500;
+      }
+      .theme-buttons {
+        display: flex;
+        gap: 18px;
+      }
+      .theme-buttons button {
+        padding: 12px 18px;
+        border: none;
+        border-radius: 18px;
+        cursor: pointer;
+        font-size: 18px;
+        transition: 0.3s;
+      }
+      #dark-btn {
+        background: black;
+        color: white;
+      }
+      #light-btn {
+        background: white;
+        color: black;
+      }
+      #bw-btn {
+        background: gray;
+        color: white;
+      }
+      .theme-buttons button:hover {
+        transform: scale(1.05);
+      }
+    </style>
+  </head>
+  <header class="header">
+    <span class="title">Change Theme :</span>
+    <div class="theme-buttons">
+      <button id="dark-btn">Dark</button>
+      <button id="light-btn">Light</button>
+      <button id="bw-btn">Black & White</button>
+    </div>
+  </header>
+  <body>
+    <div id="drawing-board"></div>
+
+    <div class="controls">
+      <button id="clear-board">Clear</button>
+
+      <div class="control-group">
+        <strong>Brush Size</strong>
+        <input type="range" id="slider" min="0" max="50" value="10" />
+      </div>
+
+      <div class="control-group">
+        <label for="colorPicker"><strong>Color</strong></label>
+        <input type="color" id="colorPicker" value="#ff0000" />
+      </div>
+    </div>
+    <script>
+      const board = document.getElementById("drawing-board");
+      const clearBtn = document.getElementById("clear-board");
+      const slider = document.getElementById("slider");
+      const colorPicker = document.getElementById("colorPicker");
+
+      let isDrawing = false;
+      let brushSize = slider.value;
+      let brushColor = colorPicker.value;
+
+      board.addEventListener("mousedown", (e) => {
+        isDrawing = true;
+        draw(e);
+      });
+
+      board.addEventListener("mousemove", (e) => {
+        if (isDrawing) {
+          draw(e);
+        }
+      });
+
+      document.addEventListener("mouseup", () => {
+        isDrawing = false;
+      });
+
+      function draw(e) {
+        const dot = document.createElement("div");
+        dot.classList.add("drawing");
+        const rect = board.getBoundingClientRect();
+
+        dot.style.width = brushSize + "px";
+        dot.style.height = brushSize + "px";
+        dot.style.backgroundColor = brushColor;
+
+        dot.style.left = e.clientX - rect.left - brushSize / 2 + "px";
+        dot.style.top = e.clientY - rect.top - brushSize / 2 + "px";
+
+        board.appendChild(dot);
+      }
+
+      slider.addEventListener("input", () => {
+        brushSize = slider.value;
+      });
+
+      colorPicker.addEventListener("input", () => {
+        brushColor = colorPicker.value;
+      });
+      clearBtn.addEventListener("click", () => {
+        board.innerHTML = "";
+      });
+
+      darkBtn = document.getElementById("dark-btn");
+      lightBtn = document.getElementById("light-btn");
+      bwBtn = document.getElementById("bw-btn");
+      const themes = {
+        dark: {
+          background: "#121212",
+          text: "#ffffff",
+        },
+        light: {
+          background: "#ffffff",
+          text: "#000000",
+        },
+        bw: {
+          background: "#333333",
+          text: "#f0f0f0",
+        },
+      };
+      function applyTheme(themeName) {
+        document.body.style.backgroundColor = themes[themeName].background;
+        document.body.style.color = themes[themeName].text;
+      }
+
+      darkBtn.addEventListener("click", () => applyTheme("dark"));
+      lightBtn.addEventListener("click", () => applyTheme("light"));
+      bwBtn.addEventListener("click", () => applyTheme("bw"));
+    </script>
+  </body>
+</html>

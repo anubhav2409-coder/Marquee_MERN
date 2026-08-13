@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Event Bubbling</title>
+
+  <style>
+    #grand-parent {
+      width: 300px;
+      height: 300px;
+      background-color: rgb(213, 37, 37);
+    }
+
+    #parent {
+      width: 200px;
+      height: 200px;
+      background-color: rgb(200, 119, 119);
+    }
+
+    #child {
+      width: 100px;
+      height: 100px;
+      background-color: rgb(162, 223, 7);
+    }
+
+    #grand-child {
+      width: 50px;
+      height: 50px;
+      background-color: rgb(10, 187, 206);
+    }
+
+    #grand-parent,
+    #parent,
+    #child,
+    #grand-child {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+
+<h2>Event Bubbling Example</h2>
+
+<div id="grand-parent">
+ 
+  <div id="parent">
+    
+    <div id="child">
+      
+      <div id="grand-child">
+       
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const grandParent = document.getElementById("grand-parent");
+  const parent = document.getElementById("parent");
+  const child = document.getElementById("child");
+  const grandChild = document.getElementById("grand-child");
+
+  grandParent.addEventListener("click", function () {
+    console.log("Grand Parent");
+  });
+
+  parent.addEventListener("click", function () {
+    console.log("Parent");
+  });
+
+  child.addEventListener("click", function () {
+    console.log("Child");
+  });
+
+  grandChild.addEventListener("click", function () {
+    console.log("Grand Child");
+  });
+</script>
+
+</body>
+</html>

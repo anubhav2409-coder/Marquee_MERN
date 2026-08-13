@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ol id="list">
+        <li>child 1</li>
+        <li>child 2</li>
+        <li id="item-3">child 3</li>
+        <li>child 4</li>
+        <li style="display: none">child 5</li>
+    </ol>
+
+    <script>
+    let ol = document.getElementById("list");
+
+    let referenceNode = document.getElementById("item-3");
+
+    let newNode = document.createElement("li");
+    newNode.innerText = "new item";
+
+    ol.insertBefore(newNode, referenceNode);
+        
+    </script>
+</body>
+</html>
